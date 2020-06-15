@@ -1,0 +1,52 @@
+<!doctype html>
+{% load static %}
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SocialNetwork{% endblock title %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+</head>
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>CompCompon</title>#}
+{#</head>#}
+{#<body>#}
+{#{% if user.is_authenticated %}#}
+{#    <h1>Привет, {{ user.username }} ! Добро пожаловать в мой магазин!</h1>#}
+{#    <a class="logout" href="{% url 'logout' %}">Выйти</a>#}
+{#{% else %}#}
+{#    <p>Вы не вошли на сайт</p>#}
+{#    <a href="{% url 'login' %}">Войти</a>#}
+{#    <a href="{% url 'signup' %}">Зарегистрироваться</a>#}
+{#{% endif %}#}
+{#</body>#}
+<body>
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Привет, {{ user.username }} ! Это мой магазин!</h1>
+        <p> {{ user.is_authenticated }} </p>
+        <a href="{% url 'logout' %}">Выйти</a>
+    {% else %}
+        <p>Вы не вошли на сайт</p>
+        <p> {{ user.is_authenticated }} </p>
+        <a href="{% url 'login' %}">Войти</a>
+        <a href="{% url 'signup' %}">Зарегистрироваться</a>
+    {% endif %}
+{#    <h2>Просмотреть все заказы:</h2>#}
+{#    <a href="{% url 'goods:product_list' %}">#}
+{#        <div class="btn btn-info mb-4">Все товары</div>#}
+{#    </a>#}
+{#      <h2>Поиск заказов покупателя </h2>#}
+    {% comment %}
+  <form action="{% url 'search' %}" method="GET">
+    {% csrf_token %}
+    <input name="q" type="text" placeholder="Введите имя или фамилию...">
+  </form>
+  {% endcomment %}
+{#    <div id="root"></div>#}
+{#    <script src="/static/js/bundle.js"></script>#}
+
+{% endblock content %}
+</body>
+</html>

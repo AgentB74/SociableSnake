@@ -13,9 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+# from basic import views
+# from users import views as user_views, endpoints
+# from goods import views as goods_views
+# from cart import views as cart_views
+# from news import views as news_views
+# from orders import views as orders_views
+
+from django.conf.urls import url
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
+    path('users/', include('django.contrib.auth.urls')),
+    path('', include('basic.urls'))
 ]
