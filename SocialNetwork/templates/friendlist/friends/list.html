@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends "friendlist/base.html" %}
 {% load static %}
-{% block title %}Сообщения{% endblock %}
-{% block content2 %}
+{% block title %}Друзья{% endblock %}
+{% block content %}
     {#    <table class="cart">#}
     {#        <thead>#}
     {#        <tr>#}
@@ -14,9 +14,15 @@
     {#        </tr>#}
     {#        </thead>#}
     {#        <tbody>#}
-    <div class="jumbotron" style="margin-top: 5%; font-size: 15px">
-        {% for message in messages %}
-            <p>{{ message.created }} - {{ message.message_text }}</p>
+    <div class="jumbotron">
+        {% if user.is_authenticated %}
+            {{ user.is_authenticated }}
+        {% else %}
+            <p>SOS</p>
+        {% endif %}
+
+        {% for friend in friends %}
+            <p>{{ friend.friend_id.first_name }} - {{ friend.friend_id.last_name }}</p>
             {#            <tr>#}
             {#                <td>#}
             {#                    <a href="{{ product.get_absolute_url }}"> <img#}
@@ -40,11 +46,11 @@
             {#                <td class="num">${{ item.total_price }}</td>#}
             {#            </tr>#}
         {% endfor %}
-        <form action="{% url "message:send_message" %}" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Отправить">
-        </form>
+{#        <form action="{% url "message:send_message" %}" method="post">#}
+{#            {% csrf_token %}#}
+{#            {{form}}#}
+{#            <input type="submit" value="Отправить">#}
+{#        </form>#}
     </div>
 
     {#        <tr class="total">#}
