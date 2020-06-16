@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'usermessage',
+    'friendlist',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,7 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-LOGIN_REDIRECT_URL = '/home'
+LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
 
