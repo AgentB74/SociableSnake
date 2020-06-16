@@ -1,20 +1,35 @@
-<h2>Регистрация нового пользователя</h2>
-<form method="post">
-    {% csrf_token %}
-    <label for="{{ form.first_name.id_for_label }}">Имя:</label>
-    {{ form.first_name }}
-    <label for="{{ form.last_name.id_for_label }}">Фамилия:</label>
-    {{ form.last_name }}
-    <label for="{{ form.telephone_numb.id_for_label }}">Номер телефона:</label>
-    {{ form.telephone_numb }}
-    <label for="{{ form.username.id_for_label }}">user:</label>
-    {{ form.username }}
-    <label for="{{ form.email.id_for_label }}">Email:</label>
-    {{ form.email }}
-    <label for="{{ form.password1.id_for_label }}">Пароль:</label>
-    {{ form.password1 }}
-    <label for="{{ form.password2.id_for_label }}">Подтвердите пароль:</label>
-    {{ form.password2 }}
-    <button type="submit">Зарегистрировать</button>
-    <h3><a href="/">Назад</a></h3>
-</form>
+<!doctype html>
+{% load static %}
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+</head>
+<body>
+<div class="jumbotron">
+    <h2>Регистрация нового пользователя</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.first_name.id_for_label }}">Имя:</label>
+        {{ form.first_name }}
+        <label for="{{ form.last_name.id_for_label }}">Фамилия:</label>
+        {{ form.last_name }}
+        <label for="{{ form.telephone_numb.id_for_label }}">Номер телефона:</label>
+        {{ form.telephone_numb }}
+        <label for="{{ form.username.id_for_label }}">user:</label>
+        {{ form.username }}
+        <label for="{{ form.email.id_for_label }}">Email:</label>
+        {{ form.email }}
+        <label for="{{ form.password1.id_for_label }}">Пароль:</label>
+        {{ form.password1 }}
+        <label for="{{ form.password2.id_for_label }}">Подтвердите пароль:</label>
+        {{ form.password2 }}
+        <button type="submit">Зарегистрировать</button>
+        <h3><a href="/">Назад</a></h3>
+    </form>
+</div>
+</body>

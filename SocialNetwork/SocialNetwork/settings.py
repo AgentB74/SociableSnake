@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'usermessage',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SocialNetwork.wsgi.application'
 
-
+CSRF_COOKIE_SECURE = True
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

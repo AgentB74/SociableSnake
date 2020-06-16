@@ -1,0 +1,131 @@
+{#<!doctype html>#}
+{#{% load static %}#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport"#}
+{#          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">#}
+{#    <meta http-equiv="X-UA-Compatible" content="ie=edge">#}
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"#}
+{#          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"#}
+{#          crossorigin="anonymous">#}
+{#    <link rel="stylesheet" href="{% static 'css/style.css' %}?now" U#}
+{#    "/>#}
+{#    <title>{% block title %} Магазин {% endblock title %}</title>#}
+{#</head>#}
+{#<body>#}
+{#<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">#}
+{#    <a class="navbar-brand" href="{% url 'home' %}">Мой Магазин</a>#}
+{#    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"#}
+{#            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">#}
+{#        <span class="navbar-toggler-icon"></span>#}
+{#    </button>#}
+{#    <div class="collapse navbar-collapse" id="navbarCollapse">#}
+{#        {% if user.is_authenticated %}#}
+{#            <ul class="navbar-nav ml-auto">#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="userMenu"#}
+{#                       data-toggle="dropdown" aria-haspopup="true"#}
+{#                       aria-expanded="false">#}
+{#                        {{ user.username }}#}
+{#                    </a>#}
+{#                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">#}
+{#                        <a class="dropdown-item" href="{% url 'password_change' %}">Изменить парооль</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="{% url 'logout' %}">#}
+{#                            Выйти#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </li>#}
+{#            </ul>#}
+{#        {% else %}#}
+{#            <form class="form-inline ml-auto">#}
+{#                <a href="{% url 'login' %}" class="btn btn-outline-secondary">Войти</a>#}
+{#                <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Создать запись</a>#}
+{#            </form>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#</nav>#}
+{#<div class="container">#}
+{#    {% block content %}#}
+{#    {% endblock content %}#}
+{#</div>#}
+{#<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"#}
+{#        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"#}
+{#        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"#}
+{#        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"#}
+{#        crossorigin="anonymous"></script>#}
+{#</body>#}
+{#</html>#}
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SocialNetwork{% endblock title %}</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/homeStyle.css"/>
+</head>
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>CompCompon</title>#}
+{#</head>#}
+{#<body>#}
+{#{% if user.is_authenticated %}#}
+{#    <h1>Привет, {{ user.username }} ! Добро пожаловать в мой магазин!</h1>#}
+{#    <a class="logout" href="{% url 'logout' %}">Выйти</a>#}
+{#{% else %}#}
+{#    <p>Вы не вошли на сайт</p>#}
+{#    <a href="{% url 'login' %}">Войти</a>#}
+{#    <a href="{% url 'signup' %}">Зарегистрироваться</a>#}
+{#{% endif %}#}
+{#</body>#}
+<body>
+<h1>{% block header %}{% endblock header %}</h1>
+{#{% block content %}#}
+{% if user.is_authenticated %}
+    <h1> {{ user.username }} ! Это мой магазин!</h1>
+    <p> {{ user.is_authenticated }} </p>
+    <a href="{% url 'logout' %}">Выйти</a>
+    <div>
+        {% block content %}
+{#            {% include "start.html" %}#}
+        {% endblock %}
+    </div>
+{% else %}
+    <div name="test" class="jumbotron">
+        <h1>Вы не зарегистрированы</h1>
+        <div class="container">
+{#            <p> {{ user.is_authenticated }} </p>#}
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Войти</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Зарегистрироваться</a>
+            </p>
+        </div>
+    </div>
+{% endif %}
+{#    <h2>Просмотреть все заказы:</h2>#}
+{#    <a href="{% url 'goods:product_list' %}">#}
+{#        <div class="btn btn-info mb-4">Все товары</div>#}
+{#    </a>#}
+{#      <h2>Поиск заказов покупателя </h2>#}
+{% comment %}
+  <form action="{% url 'search' %}" method="GET">
+    {% csrf_token %}
+    <input name="q" type="text" placeholder="Введите имя или фамилию...">
+  </form>
+  {% endcomment %}
+{#    <div id="root"></div>#}
+{#    <script src="/static/js/bundle.js"></script>#}
+
+{#{% endblock content %}#}
+</body>
+</html>
