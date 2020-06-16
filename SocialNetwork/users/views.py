@@ -6,7 +6,11 @@ from django.views import generic
 
 
 # Create your views here.
+
+# Страница регистрации
 class SignUp(generic.CreateView):
     form_class = CustomUserCreationForm
+    # В случае успеха перенаправление на страницу авторизации
     success_url = reverse_lazy('login')
+    # Сама страница регистрации
     template_name = 'signup.html'
