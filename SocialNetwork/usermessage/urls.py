@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^delete/(?P<message_id>[0-9]+)$', csrf_exempt(views.remove_message)),
     url(r'^edit/(?P<message_id>[0-9]+)$', csrf_exempt(views.remove_message)),
     url(r'^send/', csrf_exempt(views.send_message), name='send_message'),
-    url(r'^list/', views.message_list),
+    url(r'^list/(?P<owner_id>[0-9]+)$', views.message_list, name="message_list"),
 ]
 #
 # urlpatterns = [

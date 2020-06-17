@@ -5,12 +5,12 @@ from django.shortcuts import render
 
 # "Стартовая" страница
 def start_view(request):
-    return render(request, "start.html")
+    return render(request, "home.html")
 
 
-# "Домашняя" страница
-def home_view(request):
-    return render(request, "reg.html")
+# # "Домашняя" страница
+# def home_view(request):
+#     return render(request, ".html")
 
 # # Страница регистрации
 # def signup_view(request):

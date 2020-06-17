@@ -10,19 +10,21 @@ from .models import Message, Dialog
 # from .models import Cart, CartItem
 # from .forms import CartAddProductForm
 
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
+# from rest_framework import status
 
 # from .serializers import CartSerializer, CartItemSerializer, CartItemSerializer2
 from collections import OrderedDict
 from .forms import MessageSendForm
+from users.models import CustomUser
 
 
 # Create your views here.
-def message_list(request):
+def message_list(request, owner_id):
     try:
-        dialog = Dialog.objects.get(sender=1, recipient=1)
+        owner = CustomUser.objects.get(id=owner_id)
+        dialog = Dialog.objects.get(sender=owner)
         messages = Message.objects.filter(dialog_id=dialog)
     except Message.DoesNotExist:
         return HttpResponse(status=404)
@@ -30,7 +32,8 @@ def message_list(request):
         return HttpResponse(status=404)
     # for message in messages:
     #     message['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'], 'update': True})
-    return render(request, 'usermessages/umessages/list.html', {'messages': messages, 'form': MessageSendForm})
+    return render(request, 'usermessages/umessages/messageList.html',
+                  {'messages': messages, 'owner': owner, 'form': MessageSendForm})
 
 
 @require_POST
@@ -59,18 +62,10 @@ def remove_message(request, message_id):
     try:
         message = Message.objects.get(id=message_id)
     except Message.DoesNotExist:
-        # return Response(status=status.HTTP_404_NOT_FOUND)
         return HttpResponse(status=404)
     if request.method == 'DELETE':
-        # cart = Cart(request)
         message.delete()
-        print("NESOSI")
         return HttpResponse(status=204)
-        # return Response(status=status.HTTP_204_NO_CONTENT)
-        # cart.remove(product)
-        # return redirect('cart:cart_detail')
-    else:
-        print("SOSIIII")
 
 # def cart_detail(request):
 #     cart = Cart(request)

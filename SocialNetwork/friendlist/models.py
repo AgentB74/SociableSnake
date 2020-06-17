@@ -4,7 +4,7 @@ from users.models import CustomUser
 
 # Create your models here.
 class FriendList(models.Model):
-    # владелей этого списка друзей
+    # владелец этого списка друзей
     owner = models.OneToOneField(CustomUser, related_name='friend_list', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -14,7 +14,7 @@ class FriendList(models.Model):
 class Friend(models.Model):
     # Привязка к конкретному френдлисту
     f_list_id = models.ForeignKey(FriendList, related_name='friends', on_delete=models.CASCADE)
-    # текст сообщения
+    # id друга
     friend_id = models.ForeignKey(CustomUser, related_name='friend', on_delete=models.CASCADE)
 
     class Meta:

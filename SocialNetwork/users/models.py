@@ -6,7 +6,7 @@ from datetime import timedelta
 from django.core import validators
 
 from django.conf import settings
-import jwt
+# import jwt
 
 
 # Create your models here.
