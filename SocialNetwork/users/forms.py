@@ -9,7 +9,7 @@ class CustomUserCreationForm(UserCreationForm):
         # fields = UserCreationForm.Meta.fields + ('age',)
         fields = ('first_name', 'last_name', 'username', 'email', 'telephone_numb',)
         help_texts = {
-            'username': None,
+            'username': 'user',
             'email': None,
         }
 

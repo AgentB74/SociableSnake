@@ -73,23 +73,18 @@ class UserEditProfile(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateVie
         return reverse('users:user_profile', kwargs={'user_id': self.request.user.id})
 
 
-# # Страница редактирования профиля
-# class UserDeleteProfile(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
-#     # Сама страница с редактированием
-#     # template_name = 'edit.html'
-#     model = CustomUser
-#     success_url = "/"
-#
-#     def test_func(self):
-#         try:
-#             return self.model.objects.get(id=self.kwargs['pk']).id == self.request.user.id
-#         except self.model.DoesNotExist:
-#             return HttpResponse(status=404)
-#
-#     # В случае успеха перенаправление на страницу профиля пользователя
-#     # def get_success_url(self):
-#     #     return reverse('users:user_profile', kwargs={'user_id': self.request.user.id})
-#
-#     def delete(self, request, *args, **kwargs):
-#         del_user = self.model.objects.get(id=self.kwargs['pk'])
-#         del_user.delete()
+# Удаление профиля
+class UserDeleteProfile(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = CustomUser
+    success_url = "/"
+
+    def test_func(self):
+        try:
+            return self.model.objects.get(id=self.kwargs['pk']).id == self.request.user.id
+        except self.model.DoesNotExist:
+            return HttpResponse(status=404)
+
+    def delete(self, request, *args, **kwargs):
+        del_user = self.model.objects.get(id=self.kwargs['pk'])
+        del_user.delete()
+        return redirect('users:signup')

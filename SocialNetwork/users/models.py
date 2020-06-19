@@ -11,7 +11,7 @@ from django.conf import settings
 
 # Create your models here.
 class CustomUser(AbstractUser):
-    telephone_numb = models.CharField(max_length=12, null=True, blank=True, unique=True)
+    telephone_numb = models.CharField(max_length=12, null=False, default="-", blank=True, unique=True)
 
     def __str__(self):
         """
