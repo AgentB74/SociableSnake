@@ -1,5 +1,3 @@
-from abc import ABC
-
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render, redirect
@@ -23,15 +21,10 @@ class FriendView(LoginRequiredMixin, UserPassesTestMixin, generic.View):
         try:
             f_list = self.model2.objects.get(owner=CustomUser.objects.get(id=self.kwargs['owner_id']))
         except self.model2.DoesNotExist:
-            print("sas")
             new_f_list = self.model2.create(CustomUser.objects.get(id=self.kwargs['owner_id']))
             new_f_list.save()
             return True
             # return HttpResponse(status=404)
-        print(f_list)
-        print(f_list.owner.id)
-        print(self.request.user.id)
-        print(f_list.owner.id == self.request.user.id)
         return f_list.owner.id == self.request.user.id
 
     def get(self, *args, **kwargs):
@@ -45,9 +38,7 @@ class FriendView(LoginRequiredMixin, UserPassesTestMixin, generic.View):
             return HttpResponse(status=404)
         except self.model3.DoesNotExist:
             return HttpResponse(status=404)
-        print(owner)
-        print(friends)
-        return render(self.request, 'friendlist/friends/list.html', {'friends': friends})
+        return render(self.request, 'friendlist/list.html', {'friends': friends})
 
 
 @require_POST
@@ -65,7 +56,7 @@ def add_friend(request, user_id, owner_id):
     new_friend = Friend.create(friends_list, friend)
     new_friend.save()
     # return HttpResponse(status=200)
-    return render(request, 'friendlist/friends/list.html', {'friends': Friend.objects.filter(f_list_id=friends_list)})
+    return redirect('friendlist:friend_list', owner_id=owner_id)
 
 
 def delete_friend(request, user_id, owner_id):
@@ -73,9 +64,6 @@ def delete_friend(request, user_id, owner_id):
         friend = CustomUser.objects.get(id=user_id)
         owner = CustomUser.objects.get(id=owner_id)
         friends_list = FriendList.objects.get(owner=owner)
-        print(friend)
-        print(owner)
-        print(friends_list)
     except Friend.DoesNotExist:
         return HttpResponse(status=404)
     except CustomUser.DoesNotExist:
@@ -85,7 +73,7 @@ def delete_friend(request, user_id, owner_id):
         # if request.method == 'DELETE':
         # cart = Cart(request)
     del_friend = Friend.objects.get(f_list_id=friends_list, friend_id=friend)
-    print(del_friend)
     del_friend.delete()
     # return HttpResponse(status=204)
-    return render(request, 'friendlist/friends/list.html', {'friends': Friend.objects.filter(f_list_id=friends_list)})
+    # return render(request, 'friendlist/list.html', {'friends': Friend.objects.filter(f_list_id=friends_list)})
+    return redirect('friendlist:friend_list', owner_id=owner_id)

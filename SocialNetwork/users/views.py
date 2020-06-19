@@ -23,16 +23,6 @@ class UserView(LoginRequiredMixin, generic.View):
     login_url = reverse_lazy('login')
     model = CustomUser
 
-    # template_name = 'users/list.html'
-    # success_url = reverse_lazy('edit_page')
-    # success_msg = 'nect'
-    # fields = ['first_name', 'last_name']
-
-    # def get_queryset(self):
-    #     print("sas")
-    #     users = self.model.objects.all(self)
-    #     print(users)
-    #     return render(self.request, 'users/list.html', {'users': users})
     def get(self, request):
         try:
             users = self.model.objects.all()

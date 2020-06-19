@@ -23,7 +23,7 @@ class Dialog(models.Model):
 
 class MessageText(models.Model):
     # текст сообщения
-    message_text = models.TextField(blank=True, default="")
+    message_text = models.TextField(max_length=255, blank=True, default="")
     # дата написания сообщения
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     # дата обновления сообщения (дата обновления текста сообщения)
@@ -47,9 +47,6 @@ class Message(models.Model):
     recipient = models.ForeignKey(CustomUser, related_name='message_recipient', on_delete=models.CASCADE)
     # Текст сообщения
     text = models.ForeignKey(MessageText, related_name="m_text", on_delete=models.CASCADE)
-
-    # Прочтено ли сообщение
-    # read = models.BooleanField()
 
     class Meta:
         ordering = ('id',)
