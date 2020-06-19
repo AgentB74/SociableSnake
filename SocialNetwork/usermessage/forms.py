@@ -11,4 +11,4 @@ class CartAddProductForm(forms.Form):
 
 class MessageSendForm(forms.Form):
     # mess_text = forms.Textarea()
-    mess_text = forms.CharField(label='Your text', max_length=100, widget=forms.Textarea)
+    mess_text = forms.CharField(label='', max_length=200, widget=forms.Textarea(attrs={'class': 'form-text'}))

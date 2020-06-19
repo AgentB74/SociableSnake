@@ -10,6 +10,11 @@ class FriendList(models.Model):
     def __str__(self):
         return 'FriendList {}'.format(self.id)
 
+    @classmethod
+    def create(cls, owner):
+        friend_list = cls(owner=owner)
+        return friend_list
+
 
 class Friend(models.Model):
     # Привязка к конкретному френдлисту

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Message, Dialog
+from .models import Message, Dialog, MessageText
 
 
 # Register your models here.
@@ -10,13 +10,18 @@ class MessageInline(admin.TabularInline):
 
 
 @admin.register(Dialog)
-class UserMessageAdmin(admin.ModelAdmin):
-    list_display = ['sender', 'recipient']
-    list_filter = ['sender', 'recipient']
+class DialogAdmin(admin.ModelAdmin):
+    list_display = ['created', 'updated', 'participant1', 'participant2']
+    list_filter = ['created', 'updated']
     inlines = [MessageInline]
 
 
 @admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'dialog_id', 'text', 'sender', 'recipient']
+    list_filter = ['id', 'dialog_id', 'sender', 'recipient']
+
+
+@admin.register(MessageText)
 class MessageTextAdmin(admin.ModelAdmin):
-    list_display = ['id', 'dialog_id', 'created', 'updated']
-    list_filter = ['id', 'dialog_id', 'created', 'updated']
+    list_display = ['id', 'message_text']

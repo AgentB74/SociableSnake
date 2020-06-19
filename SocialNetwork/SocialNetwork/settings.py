@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'usermessage',
     'friendlist',
+    # 'channels',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,24 @@ TEMPLATES = [
         },
     },
 ]
+
+# Конфигурация Channels
+# ASGI_APPLICATION = "SocialNetwork.routing.application"
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'asgiref.inmemory.ChannelLayer',
+#         'ROUTING': 'myproj.routing.channel_routing',
+#     },
+# }
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [CHANNEL_REDIS_HOST],
+#             "symmetric_encryption_keys": [SECRET_KEY],
+#         },
+#     },
+# }
 
 WSGI_APPLICATION = 'SocialNetwork.wsgi.application'
 
