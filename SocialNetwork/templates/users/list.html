@@ -5,26 +5,18 @@
     <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/friendList.css"/>
 {% endblock %}
 {% block content2 %}
-    {#    <table class="cart">#}
-    {#        <thead>#}
-    {#        <tr>#}
-    {#            <th>Image</th>#}
-    {#            <th>Product</th>#}
-    {#            <th>Quantity</th>#}
-    {#            <th>Remove</th>#}
-    {#            <th>Unit price</th>#}
-    {#            <th>Price</th>#}
-    {#        </tr>#}
-    {#        </thead>#}
-    {#        <tbody>#}
     <div class="jumbotron">
         <h1>Пользователи</h1>
         <hr class="my-4">
         {% if users.count == 0 %}
-            <div><p>Пустота...</p></div>
+            <div><h3>Пустота...</h3></div>
         {% else %}
             {% for f_user in users %}
                 <div class="friendLi">
+                    <div class="prof_icon" style="margin-right: 150px;">
+                        <img src="http://127.0.0.1:8000/static/img/Profile_Icon1.png" style="width: 80px;"
+                             alt="profile_icon"/>
+                    </div>
                     <div style="width: 20%">
                         <a href="{% url 'users:user_profile' f_user.id %}">{{ f_user.first_name }} {{ f_user.last_name }}</a>
                     </div>
@@ -36,13 +28,17 @@
                         {% endif %}
                     </div>
                     <div class="actions">
-                        <form action="{% url 'friendlist:add_friend' f_user.id user.id %}" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="Добавить">
-                        </form>
+                        {% if user.id != f_user.id %}
+                            <form action="{% url 'friendlist:add_friend' f_user.id user.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-success" type="submit" style="font-size: 20px"><span
+                                        class="fa fa-plus-circle"></span></button>
+                            </form>
+                        {% endif %}
                         <form action="{% url 'message:message_list' user.id f_user.id %}" method="get">
                             {% csrf_token %}
-                            <input type="submit" value="Написать">
+                            <button class="btn btn-primary" type="submit" style="font-size: 20px"><span
+                                    class="fa fa-pencil-square"></span></button>
                         </form>
                     </div>
                 </div>
@@ -50,16 +46,4 @@
             {% endfor %}
         {% endif %}
     </div>
-
-    {#        <tr class="total">#}
-    {#            <td>Total</td>#}
-    {#            <td colspan="4"></td>#}
-    {#            <td class="num">${{ cart.get_total_price }}</td>#}
-    {#        </tr>#}
-    {#        </tbody>#}
-    {#    </table>#}
-    {#    <p class="text-right">#}
-    {#        <a href="{% url "goods:product_list" %}" class="button light">Continue shopping</a>#}
-    {#        <a href="{% url "orders:order_create" %}" class="button">Checkout</a>#}
-    {#    </p>#}
 {% endblock %}

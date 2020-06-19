@@ -17,14 +17,30 @@
                 <h3>Email: {{ owner.email }}</h3>
             </div>
         </div>
-    </div>
-    <div id="newJumbo" class="jumbotron">
-        <div class="myActions">
-            <a href="{% url 'message:message_list' user.id owner.id %} ">Написать сообщение</a>
+        <div style="width: 60%; margin-left: 10%">
+            <div class="myActions">
+                <a href="{% url 'message:message_list' user.id owner.id %}">
+                    <div style="margin-bottom: 20%">
+                        <button class="btn btn-primary" style="font-size: 22px; width: 100%"><span
+                                class="fa fa-pencil-square"></span> Cообщение
+                        </button>
+                    </div>
+                </a>
+            </div>
             <div class="extraActions">
                 {% if owner.id == user.id %}
-                    <a href="{% url 'users:user_edit' user.id %} ">Редактировать профиль</a>
-{#                    <a href="{% url 'users:user_delete' user.id %} ">Удалить профиль</a>#}
+                    <a href="{% url 'users:user_edit' user.id %} ">
+                        <div style="margin-bottom: 20%">
+                            <button class="btn btn-primary" style="font-size: 22px; width: 100%;"><span
+                                    class="fa fa-pencil-square-o"></span> Редактировать
+                            </button>
+                        </div>
+                    </a>
+                    <a href="{% url 'users:user_delete' user.id %} ">
+                        <button class="btn btn-danger" style="font-size: 22px"><span
+                                class="fa fa-times"></span> Удалить профиль
+                        </button>
+                    </a>
                 {% endif %}
             </div>
         </div>

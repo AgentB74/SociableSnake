@@ -33,16 +33,14 @@
 #jumbo2 {
     display: flex;
     flex-direction: row;
-    margin: 0 ;
+    margin: 0;
     font-size: 15px;
 }
 
-/*#jumbo2 > .info{*/
-/*    background: red;*/
-/*}*/
-
-.info > a {
-    margin-left: auto;
+.info {
+    width: 100%;
+    margin-left: 0;
+    margin-right: auto;
 }
 
 #jumbo3 {
@@ -59,28 +57,31 @@
     margin-bottom: 10px;
 }
 
-#newJumbo {
-    margin: -2% 0 0;
-    padding-top: 3%;
-    font-size: 15px;
-}
+/*#newJumbo {*/
+/*    display: flex;*/
+/*    margin: 0 ;*/
+/*    padding-top: 3%;*/
+/*    !*font-size: 25px;*!*/
+/*    !*width: 22%;*!*/
+/*}*/
 
 
-.myActions {
-    display: flex;
-    flex-direction: row;
-    font-size: 25px;
-    margin: 0;
-    align-items: center;
-    justify-content: space-between;
-}
+/*.myActions {*/
+/*    font-size: 25px;*/
+/*    align-items: center;*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
-.extraActions {
-    margin-left: auto;
-}
 
-.myActions > a {
-    margin-left: auto;
-    margin-right: auto;
-}
+/*.extraActions {*/
+/*    margin-left: 50%;*/
+/*}*/
+
+/*.myActions > a {*/
+/*    color:red;*/
+/*    font-size: 10px;*/
+/*    margin-left: 0;*/
+/*    margin-right: 0;*/
+/*    margin-bottom: 100px;*/
+/*}*/
 
