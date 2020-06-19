@@ -52,8 +52,10 @@ def add_friend(request, user_id, owner_id):
     except CustomUser.DoesNotExist:
         return HttpResponse(status=404)
     except FriendList.DoesNotExist:
-        return HttpResponse(status=404)
-    new_friend = Friend.create(friends_list, friend)
+        # return HttpResponse(status=404)
+        new_f_list = FriendList.create(owner)
+        new_f_list.save()
+    new_friend = Friend.create(new_f_list, friend)
     new_friend.save()
     # return HttpResponse(status=200)
     return redirect('friendlist:friend_list', owner_id=owner_id)
