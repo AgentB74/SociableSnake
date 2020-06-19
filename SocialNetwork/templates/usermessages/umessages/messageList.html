@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Сообщения{% endblock %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/userMessage.css"/>
+{% endblock %}
+{% block content2 %}
+    <div class="jumbotron">
+        <div class="userMess">
+            {% for message in messages %}
+                {% if user.id == message.sender.id %}
+                    <div class="userRight">
+                        {#<p> {{ message.text.created }} - {{ message.text.message_text }}</p>#}
+                        <p>{{ message.text.message_text }}</p>
+                    </div>
+                {% else %}
+                    <div class="userLeft">
+                        {#<p> {{ message.text.created }} - {{ message.text.message_text }}</p>#}
+                        <p>{{ message.text.message_text }}</p>
+                    </div>
+                {% endif %}
+                <a>D</a>
+            {% endfor %}
+        </div>
+        {#        {{ dialog.participant1.id }} {{ dialog.participant2.id }} {{ user.id }}#}
+        {% if user.id == dialog.participant1.id and user.id == dialog.participant2.id %}
+            <form action="{% url 'message:send_message' user.id user.id %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Отправить!">
+            </form>
+        {% elif user.id == dialog.participant1.id %}
+            <form action="{% url 'message:send_message' user.id dialog.participant2.id %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Отправить!!">
+            </form>
+        {% else %}
+            <div>
+                <form action="{% url 'message:send_message' user.id dialog.participant1.id %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Отправить!!!">
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

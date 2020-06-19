@@ -1,3 +1,32 @@
 {% extends "base.html" %}
-{% block title %}Index{% endblock title %}
-{% block header %}Главная{% endblock header %}
+{% load static %}
+{% block title %}Профиль{% endblock title %}
+
+{% block content2 %}
+    <div id="jumbo2" class="jumbotron">
+        <div class="prof_icon" style="margin-right: 150px;">
+            <img src="http://127.0.0.1:8000/static/img/Profile_Icon1.png" style="width: 250px;" alt="profile_icon"/>
+        </div>
+        <div class="info">
+            <h3>Личные данные</h3>
+            <hr class="my-4">
+            <div>
+                <h3>И/Ф: {{ owner.first_name }} {{ owner.last_name }}</h3>
+                <h3>Телефон: {{ owner.telephone_numb }}</h3>
+                <h3>Логин: {{ owner.username }}</h3>
+                <h3>Email: {{ owner.email }}</h3>
+            </div>
+        </div>
+    </div>
+    <div id="newJumbo" class="jumbotron">
+        <div class="myActions">
+            <a href="{% url 'message:message_list' user.id owner.id %} ">Написать сообщение</a>
+            <div class="extraActions">
+                {% if owner.id == user.id %}
+                    <a href="{% url 'users:user_edit' user.id %} ">Редактировать профиль</a>
+{#                    <a href="{% url 'users:user_delete' user.id %} ">Удалить профиль</a>#}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

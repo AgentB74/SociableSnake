@@ -1,3 +1,37 @@
-.jumbotron{
-    background: red;
+.jumbotron {
+    margin: 0 25% 5%;
+    font-size: 15px;
+}
+
+.userMess {
+    /*display: flex;*/
+    font-size: 25px;
+    margin: 0;
+    background: #ffffff;
+    border-radius: 8px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.userRight {
+    margin: 1% 2% 3% auto;
+    width: 200px;
+    background: #d2d2d2;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.userLeft {
+    margin: 1% auto 2% 3%;
+    width: 200px;
+    background: #929292;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.form-number {
+width: 20px;
 }

@@ -1,0 +1,18 @@
+.jumbotron {
+    margin: -2% 0 0;
+    padding-top: 3%;
+    font-size: 15px;
+}
+
+.friendLi {
+    display: flex;
+    flex-direction:row;
+    font-size: 25px;
+    margin: 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actions {
+    margin-left: auto;
+}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Список пользователей{% endblock %}
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/css/friendList.css"/>
+{% endblock %}
+{% block content2 %}
+    {#    <table class="cart">#}
+    {#        <thead>#}
+    {#        <tr>#}
+    {#            <th>Image</th>#}
+    {#            <th>Product</th>#}
+    {#            <th>Quantity</th>#}
+    {#            <th>Remove</th>#}
+    {#            <th>Unit price</th>#}
+    {#            <th>Price</th>#}
+    {#        </tr>#}
+    {#        </thead>#}
+    {#        <tbody>#}
+    <div class="jumbotron">
+        <h1>Пользователи</h1>
+        <hr class="my-4">
+        {% if users.count == 0 %}
+            <div><p>Пустота...</p></div>
+        {% else %}
+            {% for f_user in users %}
+                <div class="friendLi">
+                    <div style="width: 20%">
+                        <a href="{% url 'users:user_profile' f_user.id %}">{{ f_user.first_name }} {{ f_user.last_name }}</a>
+                    </div>
+                    <div style="margin-left: 20%; width: 35%">
+                        {% if  f_user.last_login != None %}
+                            <a>{{ f_user.last_login }}</a>
+                        {% else %}
+                            <a> - </a>
+                        {% endif %}
+                    </div>
+                    <div class="actions">
+                        <form action="{% url 'friendlist:add_friend' f_user.id user.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Добавить">
+                        </form>
+                        <form action="{% url 'message:message_list' user.id f_user.id %}" method="get">
+                            {% csrf_token %}
+                            <input type="submit" value="Написать">
+                        </form>
+                    </div>
+                </div>
+                <hr class="my-4">
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {#        <tr class="total">#}
+    {#            <td>Total</td>#}
+    {#            <td colspan="4"></td>#}
+    {#            <td class="num">${{ cart.get_total_price }}</td>#}
+    {#        </tr>#}
+    {#        </tbody>#}
+    {#    </table>#}
+    {#    <p class="text-right">#}
+    {#        <a href="{% url "goods:product_list" %}" class="button light">Continue shopping</a>#}
+    {#        <a href="{% url "orders:order_create" %}" class="button">Checkout</a>#}
+    {#    </p>#}
+{% endblock %}
